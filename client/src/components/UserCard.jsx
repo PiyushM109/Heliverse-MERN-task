@@ -1,9 +1,22 @@
+import { addUser } from "../Utils/teamSlice";
 import UserStatus from "./UserStatus";
+import { useDispatch } from "react-redux";
 
 const UserCard = ({ data }) => {
+    const dispatch = useDispatch();
+
+    const handleAddBtn = (data)=>{
+        if(data.available){
+            dispatch(addUser(data));
+        }else{
+            alert(`${data.first_name} is unavailable`)
+        }
+        
+    }
+
   return (
     <div>
-      <div className="w-[300px] bg-white border border-gray-200 rounded-lg shadow my-4">
+      <div className="w-[300px] bg-white border border-gray-200 rounded-lg shadow my-4 mx-2">
         <div className="flex justify-between px-4 pt-4">
           <div>
             <span className="font-bold">{data?.id}</span>
@@ -29,12 +42,12 @@ const UserCard = ({ data }) => {
             {data?.gender}
           </span>
           <div className="flex mt-4 md:mt-6">
-            <a
-              href="#"
+            <button
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+              onClick={()=>{handleAddBtn(data)}}
             >
               Add to Team
-            </a>
+            </button>
           </div>
         </div>
       </div>

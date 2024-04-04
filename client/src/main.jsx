@@ -3,16 +3,21 @@ import ReactDOM from "react-dom/client";
 import Home from "./pages/Home.jsx";
 import NavBar from "./components/NavBar.jsx";
 import Users from "./pages/Users.jsx";
+import appStore from "./Utils/appStore.jsx";
+import Team from "./pages/Team.jsx";
+import { Provider } from "react-redux";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
+    <Provider store={appStore}>
     <div className="app bg-[#fafaf9] w-screen h-screen">
       <NavBar />
       <Outlet />
     </div>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
@@ -28,10 +33,10 @@ const appRouter = createBrowserRouter([
         path: "/users",
         element: <Users />,
       },
-      // {
-      //   path: "/contact",
-      //   element: <Contact />,
-      // },
+      {
+        path: "/createTeam",
+        element: <Team />,
+      },
       // {
       //   path:"/restaurant/:resId",
       //   element: <RestaurantMenu />
