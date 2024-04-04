@@ -16,7 +16,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/users?page=${currentPage}`)
+      .get(`https://heliverse-mern-task-server.vercel.app/api/users?page=${currentPage}`)
       .then((resp) => {
         // console.log(resp.data);
         setCurrentPage(resp?.data?.currentPage);
@@ -37,8 +37,8 @@ const Users = () => {
       setCurrentPage(curr - 1);
     }
   };
-  console.log(searched);
-  console.log(users);
+  // console.log(searched);
+  // console.log(users);
 
   return (
     <div className="p-4 m-4 bg-[#fafaf9] ">

@@ -12,7 +12,7 @@ const Team = () => {
   const dispatch = useDispatch();
   const handleBtn = (event)=>{
     event.preventDefault();
-    axios.post("http://localhost:3000/api/team",{"name":name,"members":teamMembers}).then((resp)=>{
+    axios.post("https://heliverse-mern-task-server.vercel.app/api/team",{"name":name,"members":teamMembers}).then((resp)=>{
       if(resp.status===201){
         dispatch(clearUser());
         navigate("/allTeams")

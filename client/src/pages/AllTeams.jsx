@@ -6,7 +6,7 @@ const AllTeams = () => {
   const [teams, setTeams] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/teams`)
+      .get(`https://heliverse-mern-task-server.vercel.app/api/teams`)
       .then((resp) => {
         setTeams(resp.data);
       })
