@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const User = require("../model/userSchema.js");
+const dotenv = require('dotenv').config()
+
+console.log(process.env.MONGO_LINK)
 
 main()
   .then(() => {
@@ -11,7 +14,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/Heliverse");
+  await mongoose.connect("mongodb+srv://piyushmore109:Up21eqrOw69zhqqj@cluster0.41wzmly.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 }
 
 const initDB = async () => {

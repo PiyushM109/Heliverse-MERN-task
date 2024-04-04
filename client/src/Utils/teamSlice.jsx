@@ -10,8 +10,10 @@ const teamSlice = createSlice({
         addUser: (state, action) =>{
             state.users.push(action.payload);
         },
-        removeUser: (state) =>{
-            state.users.pop();
+        removeUser: (state=initialState,action) =>{
+            return {...state,
+                users: state.users.filter(item => item?._id !== action.payload?._id)}
+            
         },
         clearUser: (state) =>{
             state.users.length=0;

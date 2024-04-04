@@ -2,7 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./model/userSchema.js");
 const cors = require("cors");
+const Team = require("./model/teamSchema.js")
 const app = express();
+const dotenv = require('dotenv').config()
+
+
 
 const port = 3000;
 
@@ -13,7 +17,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/Heliverse");
+  await mongoose.connect(process.env.MONGO_LINK);
 }
 
 // const User = mongoose.model('User', userSchema);
@@ -69,6 +73,29 @@ app.post("/api/users", async (req, res) => {
   await user.save();
   res.status(200).send("Data Saved Successfully!");
 });
+
+app.post("/api/team", async (req,res)=>{
+  try {
+    const { name, members } = req.body;
+    members.map((member)=>(
+      User.findByIdAndUpdate(member._id,{...member,available : false}).then((resp)=>{
+        // console.log(resp);
+      })
+    ))
+    const newTeam = new Team({ name, members });
+    // console.log(newTeam);
+    await newTeam.save();
+    res.status(201).json(newTeam);
+} catch (error) {
+    console.error('Error saving team:', error);
+    res.status(500).json({ message: 'Error saving team' });
+}
+});
+
+app.get("/api/teams",async (req,res)=>{
+  const teams = await Team.find().populate('members');
+  res.status(200).send(teams);
+})
 
 app.listen(port, () => {
   console.log("App is running on port no: ", port);

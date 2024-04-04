@@ -6,6 +6,7 @@ import Users from "./pages/Users.jsx";
 import appStore from "./Utils/appStore.jsx";
 import Team from "./pages/Team.jsx";
 import { Provider } from "react-redux";
+import AllTeams from "./pages/AllTeams.jsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -37,10 +38,10 @@ const appRouter = createBrowserRouter([
         path: "/createTeam",
         element: <Team />,
       },
-      // {
-      //   path:"/restaurant/:resId",
-      //   element: <RestaurantMenu />
-      // },
+      {
+        path:"/allTeams",
+        element: <AllTeams />
+      },
       // {
       //   path:"/cart",
       //   element: <Cart />

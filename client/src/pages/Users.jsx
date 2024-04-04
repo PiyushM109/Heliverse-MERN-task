@@ -4,9 +4,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import TeamList from "../components/TeamList";
 import { useNavigate } from "react-router";
+import SearchBar from "../components/SearchBar";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [searched, setSearched] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(50);
   const teamMembers = useSelector((store) => store.team.users);
@@ -35,7 +37,9 @@ const Users = () => {
       setCurrentPage(curr - 1);
     }
   };
-  //   console.log(teamMembers);
+  console.log(searched);
+  console.log(users);
+
   return (
     <div className="p-4 m-4 bg-[#fafaf9] ">
       <div className="flex justify-center">
@@ -59,13 +63,24 @@ const Users = () => {
           </button>
         </div>
       </div>
-      <div className="p-4 m-4 flex justify-between">
-        <div>Search Bar</div>
-        <div>filters</div>
+      <div className="p-4 m-4 flex flex-wrap justify-between">
+        <div className="ml-8 w-[400px]">
+          <SearchBar
+            newArr={searched}
+            setSearched={setSearched}
+            fullArr={users}
+          />
+        </div>
+        <div></div>
       </div>
       <div className="mx-4 p-4 flex flex-wrap justify-evenly">
+      {searched.length != 0 &&
+        searched.map((user) => (
+          <UserCard key={user.id} data={user} inSelection={false} />
+        ))}</div>
+      <div className="mx-4 p-4 flex flex-wrap justify-evenly">
         {users.map((user) => (
-          <UserCard key={user.id} data={user} />
+          <UserCard key={user.id} data={user} inSelection={false} />
         ))}
       </div>
       <div>
